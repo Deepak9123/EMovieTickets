@@ -1,0 +1,57 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Delete Order";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h2 class="card-title">
+                                Wants to cancel this Order? Please Confirm
+                            </h2>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-8" style="font-weight:bold; text-align:center">
+                    <div class="card-body">
+                    <label asp-for="Id" class="control-label" style="color:black">Order Id</label>
+                    <input style="font-weight:bold; text-align:center" asp-for="Id" class="form-control" readonly />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                </div>
+
+                <div class="col-md-8" style="font-weight:bold; text-align:center">
+                    <div class="card-body">
+                        <label asp-for="User" class="control-label" style="color:black">Order By</label>
+                        <input style="font-weight:bold; text-align:center" asp-for="User" class="form-control" readonly />
+                        <span asp-validation-for="User" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-8" style="font-weight:bold; text-align:center">
+                    <div class="card-body">
+                        <label asp-for="Email" class="control-label" style="color:black">Email Address</label>
+                        <input style="font-weight:bold; text-align:center" asp-for="Email" class="form-control" readonly />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="submit" value="Confirm" class="btn btn-danger float-right" />
+                        </form>
+                        <a class="btn btn-secondary" asp-action="Index">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

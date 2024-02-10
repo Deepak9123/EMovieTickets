@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Invite Your Friends";
+}
+
+<style>
+
+    .error {
+        color: red;
+        font-size: smaller;
+        display: none;
+    }
+</style>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3 border border-dark p-4 rounded-top" style="background-color:cornsilk;box-shadow: 0px 0px 20px #ccc;">
+            <h3 class="text-info" style="text-align:center; font-family:'Global Sans Serif'; font-weight:bold;">Invite Your Friends Through E-Mail</h3><br />
+            <h3 style="text-align:center; color:black"><i class="fa fa-envelope fa-2x"></i></h3>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success mt-3">
+                    @ViewBag.Message
+                </div>
+            }
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger mt-3">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form action="" style="align-items:center" method="Post" class="was-validated" autocomplete="off">
+
+                <div class="input-text" style="align-content:center">
+                    <span class="input-text" style="color:black">To:</span>
+                    <input type="email" class="form-control" id="to" name="to" required />
+                    <span class="invalid-feedback">Email is Required</span>
+
+                </div>
+                <br>
+                <div class="input-text">
+                    <span class="input-text" style="color:black">Subject</span>
+                    <input type="text" class="form-control" id="subject" name="subject" required />
+                    <div class="invalid-feedback">
+                        This Field is Required
+                    </div>
+
+                </div>
+                <br>
+                <div class="input-text">
+                    <span class="input-text" style="color:black">Body</span>
+                    <textarea class="form-control" id="body" name="body" required></textarea>
+                    @*<div class="invalid-feedback">
+                    This Field is Required
+                    </div>*@
+                </div><br />
+                <input type="submit" class="btn btn-primary" value="Send" onclick="return validateForm()" />&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("Back to List", "Index", "Movies", null, new { @class = "btn btn-success" })
+            </form>
+
+        </div>
+    </div>
+</div>
+

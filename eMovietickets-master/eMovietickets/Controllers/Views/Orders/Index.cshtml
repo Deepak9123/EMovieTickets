@@ -1,0 +1,61 @@
+﻿@model List<Order>
+
+@{ 
+    ViewData["Title"] = "All orders";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2 border border-dark p-4 rounded-top" style="background-color:burlywood;box-shadow: 0px 0px 20px #ccc;">
+        <p>
+            <h3 style="text-align:center; font-weight:bold;color:black;">List of All Your Orders</h3>
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">Order ID</th>
+                    <th class="text-center">Items</th>
+                    <th class="text-center">Total</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th class="text-center">Order By</th>
+                    }
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                <tr>
+                    <td class="text-center">#@order.Id</td>
+                    <td class="text-center">
+                        <ul style="list-style-type:none">
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <li>
+                                    <div class="alert alert-info" role="alert">
+                                        <span class="badge bg-success">@item.Amount</span> [@item.Price.ToString("c")] - @item.Movie.Name
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </td>
+                        <td class="text-center">
+                        @order.OrderItems.Select(m => m.Movie.Price * m.Amount).Sum().ToString("c")
+                    </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                            <td class="text-center"> @order.User.FullName </td>
+                    }
+                    <td class="text-center">
+                            <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@order.Id">
+                                <i class="bi bi-trash"></i><span style="padding:5px"></span>Delete Order
+                            </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

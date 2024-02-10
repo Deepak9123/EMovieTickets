@@ -1,0 +1,247 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+}
+
+
+<script href url="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&display=swap"></script>
+<script src="https://kit.fontawesome.com/95a02bd20d.js"></script>
+
+<style>
+	form {
+		float: left;
+		margin-right: 10px;
+	}
+
+	buttons {
+		float: inherit;
+	}
+
+	body h1 {
+		text-align: center;
+	}
+
+
+	.card {
+		margin: 10px 20px 20px 10px;
+		width: 280px;
+		height: 310px;
+		text-align: center;
+		transform-style: preserve-3d;
+		perspective: 600px;
+		transition: 0.5s;
+	}
+
+		.card .front {
+			border: solid 10px whitesmoke;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			backface-visibility: hidden;
+			transition: 0.5s;
+			-webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+			box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+		}
+
+		.card:hover .front {
+			transform: rotateY(-180deg);
+		}
+
+		.card .back {
+			border: solid 10px whitesmoke;
+			width: 100%;
+			height: 100%;
+			background: #1d1d1d;
+			backface-visibility: hidden;
+			transform: rotateY(180deg);
+			transition: 0.5s;
+			-webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+			box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+		}
+
+		.card:hover .back {
+			transform: rotateY(0deg);
+		}
+
+		.card .back .details {
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			position: absolute;
+			width: 100%;
+			text-align: center;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+
+			.card .back .details .caption {
+				font-weight: 100;
+				font-style: italic;
+			}
+
+			.card .back .details .caption,
+			h2,
+			span {
+				color: whitesmoke;
+			}
+
+	.social-icon {
+		padding: 10px;
+	}
+
+		.social-icon a {
+			display: inline-block;
+			width: 36px;
+			height: 36px;
+			background: #333;
+			text-align: center;
+			text-decoration: none;
+			color: whitesmoke;
+			border-radius: 50%;
+			transition: 0.5s;
+		}
+
+			.social-icon a .fab {
+				line-height: 36px;
+			}
+
+			.social-icon a:hover {
+				background: rgb(104, 240, 215);
+			}
+
+				.social-icon a:hover i {
+					transition: 0.5s;
+					color: #333;
+				}
+</style>
+
+<div class="container">
+	<div class="row">
+		<div class="col-6 offset-3 border border-dark p-4 rounded-top" style="background-color:cornsilk;box-shadow: 0px 0px 5px #ccc;">
+			<div class="card">
+				<div class="front">
+					<img src="~/lib/PHOTOS.JPG" alt="My Image" style="width:280px; height:310px">
+				</div>
+				<div class="back">
+					<div class="details">
+						<div class="caption">
+							" Welcome to my websites. I created this projects to book online movie tickets. I hope you find this websites informative. "
+						</div>
+						<h3 style="color:whitesmoke"> Deepak Kumar Mahato </h3>
+						<span>Web Developer</span>
+
+						<div class="social-icon">
+							<a href="#"><i class="fab fa-facebook"></i></a>
+							<a href="#"><i class="fab fa-linkedin-in"></i></a>
+							<a href="#"><i class="fab fa-instagram"></i></a>
+							<a href="#"><i class="fab fa-pinterest"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			@*<h2>Skills</h2>
+			<ul>
+			<li>HTML, CSS, Javascript</li>
+			<li>ASP.NET MVC</li>
+			<li>C Sharp</li>
+			</ul>*@
+			<div>
+				<form class="fr" style="text-align:center" action="">
+					<label class="fr__label" for="face-rating"><strong style="color:black">How was your experience?</strong></label>
+					<div class="fr__face" role="img" aria-label="Straight face">
+						<div class="fr__face-right-eye" data-right></div>
+						<div class="fr__face-left-eye" data-left></div>
+						<div class="fr__face-mouth-lower" data-mouth-lower></div>
+						<div class="fr__face-mouth-upper" data-mouth-upper></div>
+					</div>
+					<input class="fr__input" id="face-rating" type="range" value="2.5" min="0" max="5" step="0.1">
+				</form>
+				<buttons>
+					<h2 style="font-weight:bold; color:black;">Contacts</h2>
+					<ul>
+						<li style="color:black;"> <i class="fa fa-envelope "></i> deepakmahatoj.n.v@gmail.com </li>
+						<li style="color:black;padding:2px;"><i class="fa fa-phone "></i> Phone No. +91 9123163568 </li>
+						<li style="color:black;padding:2px;"> Address: Jamshedpur, Jharkhand </li>
+					</ul>
+				</buttons>
+			</div>
+			<a style="text-align:center;text-decoration: underline overline dotted purple;  " asp-controller="Home" asp-action="Games"> Let's Play Puzzles </a>
+			@*<h2 style="font-weight:bold; color:black;">Contacts</h2>
+			<ul >
+			<li style="color:black"> Email: deepakmahatoj.n.v@gmail.com </li>
+			<li style ="color:black"> Phone No. +91 9123163568 </li>
+			<li style="color:black"> Address: Jamshedpur, Jharkhand </li>
+			</ul>*@
+		</div>
+	</div>
+</div>
+
+<script>
+	window.addEventListener("DOMContentLoaded", () => {
+		const fr = new FaceRating("#face-rating");
+	});
+
+	class FaceRating {
+		constructor(qs) {
+			this.input = document.querySelector(qs);
+			this.input?.addEventListener("input", this.update.bind(this));
+			this.face = this.input?.previousElementSibling;
+			this.update();
+		}
+		update(e) {
+			let value = this.input.defaultValue;
+
+			// when manually set
+			if (e) value = e.target?.value;
+			// when initiated
+			else this.input.value = value;
+
+			const min = this.input.min || 0;
+			const max = this.input.max || 100;
+			const percentRaw = (value - min) / (max - min) * 100;
+			const percent = +percentRaw.toFixed(2);
+
+			this.input?.style.setProperty("--percent", `${percent}%`);
+
+			// face and range fill colors
+			const maxHue = 120;
+			const hueExtend = 30;
+			const hue = Math.round(maxHue * percent / 100);
+
+			let hue2 = hue - hueExtend;
+			if (hue2 < 0) hue2 += 360;
+
+			const hues = [hue, hue2];
+			hues.forEach((h, i) => {
+				this.face?.style.setProperty(`--face-hue${i + 1}`, h);
+			});
+
+			this.input?.style.setProperty("--input-hue", hue);
+
+			// emotions
+			const duration = 1;
+			const delay = -(duration * 0.99) * percent / 100;
+			const parts = ["right", "left", "mouth-lower", "mouth-upper"];
+
+			parts.forEach(p => {
+				const el = this.face?.querySelector(`[data-${p}]`);
+				el?.style.setProperty(`--delay-${p}`, `${delay}s`);
+			});
+
+			// aria label
+			const faces = [
+				"Sad face",
+				"Slightly sad face",
+				"Straight face",
+				"Slightly happy face",
+				"Happy face"
+			];
+			let faceIndex = Math.floor(faces.length * percent / 100);
+			if (faceIndex === faces.length) --faceIndex;
+
+			this.face?.setAttribute("aria-label", faces[faceIndex]);
+		}
+	}
+</script>

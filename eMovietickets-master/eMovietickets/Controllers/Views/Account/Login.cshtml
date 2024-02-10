@@ -1,0 +1,104 @@
+﻿@using eMovietickets.Data.ViewModels; 
+@model LoginVM;
+
+@{ 
+    ViewData["Title"] = "Log in";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-hRj/e+zoJ1UjwYwvUVyJ6xUnp6r3q6z8j6St9Uf5TV5Aitn5cW8psekaGyII/NlIzUD+ZgW8ZzjZhZ0mRdd2OQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    
+    .login{
+        background-color:aquamarine;
+        min-height: 76vh;
+    }
+
+    .image {
+        min-height: 76vh;
+    }
+
+    .bg-image {
+        background-image: url('@Url.Content("~/lib/cinema.jpg")');
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .social-login {
+        position: absolute;
+        height: 140px;
+        width: 160px;
+        text-align: center;
+        bottom: 0px;
+        right: 0px;
+        color: #fff;
+    }
+
+    .social-icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-login__icon {
+        padding: 20px 10px;
+        color: #fff;
+        text-decoration: none;
+        text-shadow: 0px 0px 8px #7875B5;
+    }
+
+        .social-login__icon:hover {
+            transform: scale(1.5);
+        }
+</style>
+
+<div class="container-fluid">
+    <div class="row no-gutter" style= "box-shadow: 0px 0px 20px #ccc;">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center py-5">
+
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4" style="color:black">Login Portal</h3>
+                            <p class="text-muted mb-4">Enter your login credentials to continue</p>
+                            @if (TempData["Error"] != null)
+                            {
+                                <div class="alert alert-danger mt-3">
+                                    <span><b>Sorry!</b> - @TempData["Error"] </span>
+                                </div>
+                            }
+                            <form asp-action="Login">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="form-group mb-3">
+                                    <input asp-for="EmailAddress" type="email" placeholder="Email Address" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input asp-for="Password" type="password" placeholder="Password"  class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                    <label for="customCheck1" class="custom-control-label text-secondary">Remember Password</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Log in
+                                    <span style="padding:5px"></span> <i class=" fa fa-chevron-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div><!-- End -->
+
+    </div>
+</div>

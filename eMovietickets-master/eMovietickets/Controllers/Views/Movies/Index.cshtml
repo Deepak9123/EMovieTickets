@@ -1,0 +1,128 @@
+﻿@model X.PagedList.IPagedList<Movie>
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "List of Movies";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-hRj/e+zoJ1UjwYwvUVyJ6xUnp6r3q6z8j6St9Uf5TV5Aitn5cW8psekaGyII/NlIzUD+ZgW8ZzjZhZ0mRdd2OQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination > li {
+            list-style: none;
+            margin: 0 5px;
+        }
+
+            .pagination > li > a {
+                padding: 5px 10px;
+                text-decoration: none;
+                color: #333;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+                .pagination > li > a:hover {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+
+        .pagination > .active > a {
+            background-color: #007bff;
+            color: #fff;
+            cursor: default;
+        }
+</style>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info">
+                            <p class="card-text">
+                                <h4 class="card-title" style="font-weight:bold;">
+                                    @item.Name
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <b class="float-right">
+                                        <a class="text-white" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                        <span style="padding:5px"></span>
+                                        <a class="text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                                        </b>
+                                    }
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("User")) 
+                                    {
+                                        <b class="float-right">
+                                            <a class="text-white" asp-controller="Account" asp-action="AccessDenied"><i class="bi bi-pencil-square"></i></a>
+                                            <span style="padding:5px"></span>
+                                            <a class="text-white" asp-controller="Account" asp-action="AccessDenied"><i class="fa fa-trash"></i></a>
+                                        </b>
+                                    }
+                                </h4>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="@item.ImageURL" style="max-width: 240px; height:380px" alt="@item.Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text" style="color:black">@item.Description</p>
+                            <p class="card-text" style="color:black"><b>Cinema: </b>@item.Cinema.Name</p>
+                            <p class="card-text" style="color:black"><b>Category: </b>@item.MovieCategory</p>
+                            <p class="card-text" style="color:black"><b>Start Date: </b>@item.StartDate.ToString("dd MMM yy")</p>
+                            <p class="card-text" style="color:black"><b>End Date: </b>@item.EndDate.ToString("dd MMM yy")</p>
+                            <p class="card-text ">
+                                <b style ="color:black">Status: </b>
+                                @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+                                {
+                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                }
+                                else if (DateTime.Now > item.EndDate)
+                                {
+                                    <span class="badge bg-danger text-white">EXPIRED</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary text-white">UPCOMING</span>
+                                }
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
+                                    <i class="bi bi-eye-fill"></i> Show Details
+                                </a>
+                                <a class="btn btn-success text-white @((DateTime.Now > item.EndDate) ? "disabled" : "")" 
+                                   asp-controller="Orders" 
+                                   asp-action="AddItemToShoppingCart" 
+                                   asp-route-id="@item.Id">
+                                <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price.ToString("c"))</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>
+
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+
+@await Html.PartialAsync("_CreateItem", "Movies")
