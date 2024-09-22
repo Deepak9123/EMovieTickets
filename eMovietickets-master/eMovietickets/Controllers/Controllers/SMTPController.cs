@@ -29,7 +29,7 @@ namespace eMovietickets.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("deepakmahatoj.n.v@gmail.com", "ieyqebtejvizgidg");
+                smtp.Credentials = new NetworkCredential("deepakmahatoj.n.v@gmail.com", "your_api_key");
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Send(message);
                 ViewBag.Message = "Mail sent successfully.";
